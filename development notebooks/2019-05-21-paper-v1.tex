@@ -1,0 +1,862 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    
+\title{Equidade em Aprendizado de Maquina}
+
+    
+    
+\author{Renan Brotto}
+
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \#
+
+Equidade em Aprendizado de Máquina
+
+\hypertarget{renan-del-buono-brotto}{%
+\subsection{Renan Del Buono Brotto}\label{renan-del-buono-brotto}}
+
+\hypertarget{introduuxe7uxe3o}{%
+\subsection{Introdução}\label{introduuxe7uxe3o}}
+
+As técnicas de Aprendizado de Máquina estão em rápida ascensão em
+diversas áreas, como processamento de linguagem natural e reconhecimento
+de fala \cite{Kamath2019}, processamento de imagem \cite{Cipolla2013},
+problemas de classificação \cite{Duda2000}, reconhecimento de padrões
+\cite{Bishop2006} entre outras.
+
+O objetivo central do Aprendizado de Máquina é projetar modelos
+computacionais capazes de aprender uma determinada tarefa a partir de
+dados, sem que exista uma programação específica para a tarefa em
+questão \cite{Samuel1959}. Para tanto, apresentamos um conjunto de dados
+disponíveis, denominado conjunto de treinamento, a fim de que o modelo
+capture as informações relevantes para o problema investigado
+\cite{Hastie2009}.
+
+Além de ter um bom desempenho, segundo uma métrica adequada, frente aos
+dados de treinamento, o modelo ajustado deve ser capaz de apresentar um
+bom desempenho frente a dados desconhecidos, pertencentes a um conjunto
+normalmente denominado conjunto de teste. Este segundo requisito
+configura a capacidade de generalização do modelo \cite{Bishop2006},
+\cite{haykin-rn}.
+
+Contudo, durante o processo de aprendizagem, o modelo pode capturar
+informações irrelevantes, ou mesmo indesejadas, para a tarefa
+considerada, configurando uma situação de sobreajuste \cite{haykin-rn}.
+Neste tipo de situação, temos um bom desempenho frente ao conjunto de
+treinamento, mas o modelo se comporta mal quando avaliado frente a novos
+dados \cite{Bishop2006}. Dentre as informações indesejadas aprendidas,
+podemos citar ruído presente sobre os dados \cite{Bishop2006} ou mesmo
+algum tipo de viés apresentado nos dados de treinamento.
+
+O viés contido nos dados de treinamento desempenha um papel fundamental
+quando aplicamos os modelos de Aprendizado de Máquina em tarefas com
+impacto social direto, tais como concessão de crédito \cite{ONeil2016}.,
+aprovação em universidades \cite{ONeil2016} ou a concessão de liberdade
+condicional \cite{Chouldechova2017}. Neste tipo de problema as técnicas
+clássicas de aprendizado incorporam as tendências observadas nos dados,
+o que pode dar origem a atributos discriminativos, como por exemplo o
+gênero em um problema de concessão de crédito ou a etnia em um problema
+de concessão de liberdade condicional. Uma vez aprendida esta
+característica, o modelo ajustado passa a produzir resultados que podem
+contribuir ainda mais com a disparidade do problema \cite{ONeil2016}.
+
+    \hypertarget{objetivo}{%
+\subsection{Objetivo}\label{objetivo}}
+
+Nosso objetivo neste trabalho é aplicar as técnicas de ICA
+\cite{Hyvarinen2001} sobre os atributos do nosso problema de modo a
+promover a equidade na classificação. Para tanto, vamos investigar a
+descorrelação linear, tendo como base o trabalho \cite{Zafar2017}, e a
+descorrelação não-linear, que é uma condição mais próxima da
+independência.
+
+Na sequência, descreveremos o \emph{dataset} que usaremos.
+
+    \hypertarget{descriuxe7uxe3o-do-dataset}{%
+\subsection{Descrição do Dataset}\label{descriuxe7uxe3o-do-dataset}}
+
+Neste trabalho, usaremos o Adult Data Set (Disponível em:
+http://archive.ics.uci.edu/ml/datasets/adult e de domínio público). Este
+conjunto de dados é formado por 14 atributos, tanto categóricos quanto
+atributos numéricos, anonimizado. Dentre estes atributos temos idade,
+tipo de trabalho, gênero, etnia, estado civil, horas trabalhadas por
+semana entre outros. Para cada indivíduo do conjunto de dados, temos um
+rótulo, indicando uma renda anual superior (igual) a \$50 k ou inferior
+a este limiar.
+
+Como muitos dos atribuitos são categóricos, vamos convertê-los para
+atributos numéricos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{preprocessing}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{SGDClassifier}
+        \PY{k+kn}{import} \PY{n+nn}{sklearn} \PY{k}{as} \PY{n+nn}{sk}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{add\PYZus{}header}\PY{p}{(}\PY{n}{header}\PY{p}{,} \PY{n}{file}\PY{p}{,} \PY{n}{output\PYZus{}name}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}function to add a header to a csv file}
+            \PY{k+kn}{import} \PY{n+nn}{csv}
+            
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{file}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{input\PYZus{}file}\PY{p}{:}
+                \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{reader}\PY{p}{(}\PY{n}{input\PYZus{}file}\PY{p}{)}
+                \PY{n}{data\PYZus{}list} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{reader}\PY{p}{)}
+            
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{output\PYZus{}name}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{newline} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{output\PYZus{}file}\PY{p}{:}
+                \PY{n}{writer} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{writer}\PY{p}{(}\PY{n}{output\PYZus{}file}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{writer}\PY{o}{.}\PY{n}{writerow}\PY{p}{(}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{header}\PY{p}{)}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{data\PYZus{}list}\PY{p}{:}
+                    \PY{n}{writer}\PY{o}{.}\PY{n}{writerow}\PY{p}{(}\PY{n}{j}\PY{p}{)}      
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Adicionando cabecalho aos dados}
+        
+        \PY{n}{header} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Workclass}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fnlwgt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Education}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Education\PYZhy{}num}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Marital Status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Occupation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relationship}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Race}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Capital Gain}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Capital Loss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hours per Week}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Native Country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Annual Gain}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../data/adult\PYZhy{}data.csv}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{output\PYZus{}name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../data/adultdataset.csv}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{add\PYZus{}header}\PY{p}{(}\PY{n}{header}\PY{p}{,} \PY{n}{file}\PY{p}{,} \PY{n}{output\PYZus{}name}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}Abrindo o conjunto de dados}
+        \PY{n}{adult\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../data/adultdataset.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Selecao de atributos}
+        \PY{n}{adult\PYZus{}data} \PY{o}{=} \PY{n}{adult\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fnlwgt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Conversão dos atributos categóricos em atributos numéricos}
+        \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{classes\PYZus{}}
+        \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Workclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{classes\PYZus{}}
+        \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Workclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Workclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{adult\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+        
+        \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Education}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{classes\PYZus{}}
+        \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Education}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Education}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Marital Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{classes\PYZus{}}
+        \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Marital Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Marital Status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Occupation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{classes\PYZus{}}
+        \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Occupation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Occupation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relationship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{classes\PYZus{}}
+        \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relationship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relationship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Race}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{classes\PYZus{}}
+        \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Race}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Race}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{classes\PYZus{}}
+        \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Native Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{le}\PY{o}{.}\PY{n}{classes\PYZus{}}
+        \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Native Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Native Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    Para melhor entendermos a inequidade presente nos dados, vamos comparar,
+na sequência, o percentual de indivíduos com alta renda na população
+completa, na população masculina e na população feminina.
+
+    \hypertarget{populauxe7uxe3o-completa}{%
+\subsubsection{População Completa}\label{populauxe7uxe3o-completa}}
+
+Vamos agora, visualizar um pouco os dados. Inicialmente, vamos analisar
+a proporção de indivíduos com alta renda (\textgreater{}= 50K) na
+população completa.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{adult\PYZus{}1} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{adult\PYZus{}0} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{n}{ratio} \PY{o}{=} \PY{n}{adult\PYZus{}1}\PY{o}{/}\PY{p}{(}\PY{n}{adult\PYZus{}0} \PY{o}{+} \PY{n}{adult\PYZus{}1}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}print(\PYZsq{}Percentual de alta renda (populacao completa): \PYZbs{}n\PYZsq{}, ratio*100, \PYZsq{}\PYZpc{}\PYZsq{})}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{2019-05-21-paper-v1_files/2019-05-21-paper-v1_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Vamos agora repetir a mesma análise entre as populações masculina e
+feminina. \#\#\# Análise das Populações Masculina e Feminina
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Populacao Feminina}
+        \PY{n}{is\PYZus{}female} \PY{o}{=} \PY{n}{adult\PYZus{}data}\PY{o}{.}\PY{n}{Sex} \PY{o}{==} \PY{l+m+mi}{0}
+        \PY{n}{is\PYZus{}female}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+        \PY{n}{female\PYZus{}data} \PY{o}{=} \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{n}{is\PYZus{}female}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}Populacao Masculina}
+        \PY{n}{is\PYZus{}male} \PY{o}{=} \PY{n}{adult\PYZus{}data}\PY{o}{.}\PY{n}{Sex} \PY{o}{==} \PY{l+m+mi}{1}
+        \PY{n}{is\PYZus{}male}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+        \PY{n}{male\PYZus{}data} \PY{o}{=} \PY{n}{adult\PYZus{}data}\PY{p}{[}\PY{n}{is\PYZus{}male}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{female\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0xb8003c8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{2019-05-21-paper-v1_files/2019-05-21-paper-v1_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{female\PYZus{}1} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{female\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{female\PYZus{}0} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{female\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{female\PYZus{}ratio\PYZus{}high} \PY{o}{=} \PY{n}{female\PYZus{}1}\PY{o}{/}\PY{p}{(}\PY{n}{female\PYZus{}0} \PY{o}{+} \PY{n}{female\PYZus{}1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}print(\PYZsq{}Percentual de alta renda (populacao feminina): \PYZbs{}n\PYZsq{}, female\PYZus{}ratio\PYZus{}high*100, \PYZsq{}\PYZpc{}\PYZsq{})}
+\end{Verbatim}
+
+    Percebemos do resultado acima que o número de indivíduos na população
+feminina na classe ``Alta Renda'' é inferior ao percentual da população
+como um todo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{male\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0xb89c6a0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{2019-05-21-paper-v1_files/2019-05-21-paper-v1_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{male\PYZus{}1} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{male\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{male\PYZus{}0} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{male\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Annual Gain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{male\PYZus{}ratio\PYZus{}high} \PY{o}{=} \PY{n}{male\PYZus{}1}\PY{o}{/}\PY{p}{(}\PY{n}{male\PYZus{}0} \PY{o}{+} \PY{n}{male\PYZus{}1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}print(\PYZsq{}Percentual de alta renda (populacao masculina): \PYZbs{}n\PYZsq{}, male\PYZus{}ratio\PYZus{}high*100, \PYZsq{}\PYZpc{}\PYZsq{})}
+         
+         
+         \PY{n}{saida\PYZus{}percentual\PYZus{}pop} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Geral}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Masculino}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feminino}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alta Renda [}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{ratio}\PY{p}{,} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{male\PYZus{}ratio\PYZus{}high}\PY{p}{,} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{female\PYZus{}ratio\PYZus{}high}\PY{p}{]}\PY{p}{,}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{percentual\PYZus{}formatado} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{saida\PYZus{}percentual\PYZus{}pop}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{saida\PYZus{}percentual\PYZus{}pop}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{saida\PYZus{}percentual\PYZus{}pop}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{percentual\PYZus{}formatado}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}                              Geral           Masculino            Feminino
+         Alta Renda [\%]  24.080955744602438  30.573657641119777  10.946058861758425
+\end{Verbatim}
+            
+    O que notamos do resultado acima é uma inequidade entre indivíduos
+rotulados como ``Alta Renda'' nas populações masculina e feminina.
+Treinar um classificador da maneira tradicional, sem nenhum tratamento
+sobre os dados, fará com que o modelo de Aprendizado de Máquina
+incorpore as tendências observadas nos dados, o que pode contribuir com
+a acentuação da inequidade observada.
+
+Na sequência do texto, apresentamos a nossa proposta para promover a
+equidade na classificação.
+
+    \hypertarget{metodologia}{%
+\section{Metodologia}\label{metodologia}}
+
+Para a tarefa de classificação, empregaremos um classificador ajustado
+segundo o paradigma de regressão logística. Para os nossos propósitos
+aqui, adotaremos o atributo ``Gênero (\emph{Sex})'' como atributo
+discriminatório. Ao todo, empregaremos 3 classificadores:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Classificador Tradicional: neste caso, faremos o treinamento sem
+  nenhum tipo de ajuste sobre os dados.
+\item
+  Classificador com Descorrelação Linear: neste segundo caso, buscaremos
+  descorrelacionar linearmente o atributo discriminatório das classes do
+  problema (``Fairness Constraints: Mechanisms for Fair
+  Classification'', Zafar, \emph{et al.}, 2017).
+\item
+  Classificador com Descorrelação Não Linear: neste último caso,
+  buscaremos a independência entre o atributo Gênero e as classe do
+  problema, por meio da descorrelação não-linear.
+\end{enumerate}
+
+Apresentamos com maior detalhe o nosso \emph{Workflow} no diagrama a
+seguir:
+
+    \hypertarget{workflow}{%
+\section{Workflow}\label{workflow}}
+
+\begin{figure}
+\centering
+\includegraphics{../fig/WorkflowIA369.png}
+\caption{title}
+\end{figure}
+
+    \hypertarget{resultados}{%
+\subsection{Resultados}\label{resultados}}
+
+Nesta seção, apresentamos nossos resultados na tarefa de classificação
+em termos de acurácia e equilíbrio entre os indivíduos classificados
+como ``Alta Renda'' nas populações masculina e feminina.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{dados\PYZus{}entrada} \PY{o}{=} \PY{n}{adult\PYZus{}data}\PY{o}{.}\PY{n}{values} \PY{c+c1}{\PYZsh{}converte dataframe para np array}
+         
+         \PY{c+c1}{\PYZsh{}Separacao dos dados em treinamento e teste}
+         \PY{n}{percentual\PYZus{}teste} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{;}
+         \PY{n}{fim\PYZus{}treinamento} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{floor}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{percentual\PYZus{}teste}\PY{p}{)}\PY{o}{*}\PY{n}{dados\PYZus{}entrada}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+         
+         \PY{n}{dados\PYZus{}treino} \PY{o}{=} \PY{n}{dados\PYZus{}entrada}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{fim\PYZus{}treinamento}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{;}
+         \PY{n}{dados\PYZus{}teste} \PY{o}{=} \PY{n}{dados\PYZus{}entrada}\PY{p}{[}\PY{n}{fim\PYZus{}treinamento}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{:}\PY{n}{dados\PYZus{}entrada}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+         
+         \PY{n}{entrada\PYZus{}treino} \PY{o}{=} \PY{n}{dados\PYZus{}treino}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{n}{dados\PYZus{}treino}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{;}
+         \PY{n}{saida\PYZus{}treino} \PY{o}{=} \PY{n}{dados\PYZus{}treino}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{dados\PYZus{}treino}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{;}
+         \PY{n}{saida\PYZus{}treino} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{saida\PYZus{}treino}\PY{p}{,} \PY{p}{(}\PY{n}{saida\PYZus{}treino}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{entrada\PYZus{}teste} \PY{o}{=} \PY{n}{dados\PYZus{}teste}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{n}{dados\PYZus{}teste}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{;}
+         
+         \PY{n}{saida\PYZus{}teste} \PY{o}{=} \PY{n}{dados\PYZus{}teste}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{dados\PYZus{}teste}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{;}
+         \PY{n}{saida\PYZus{}teste} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{saida\PYZus{}teste}\PY{p}{,} \PY{p}{(}\PY{n}{saida\PYZus{}teste}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{classificador-1}{%
+\paragraph{Classificador 1}\label{classificador-1}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{MC} \PY{o}{=} \PY{l+m+mi}{100} \PY{c+c1}{\PYZsh{}simulacoes de Monte Carlo}
+         
+         \PY{n}{acuracia\PYZus{}clf1} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{;}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{MC}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}Classificador 1}
+             \PY{n}{clf1} \PY{o}{=} \PY{n}{SGDClassifier}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{)}
+             \PY{n}{clf1}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{entrada\PYZus{}treino}\PY{p}{,} \PY{n}{saida\PYZus{}treino}\PY{p}{)}
+         
+             \PY{n}{saida\PYZus{}pred\PYZus{}1} \PY{o}{=} \PY{n}{clf1}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{entrada\PYZus{}teste}\PY{p}{)}
+             \PY{n}{saida\PYZus{}pred\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}1}\PY{p}{,} \PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{acuracia\PYZus{}clf1} \PY{o}{=} \PY{n}{acuracia\PYZus{}clf1} \PY{o}{+} \PY{n}{metrics}\PY{o}{.}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{saida\PYZus{}teste}\PY{p}{,} \PY{n}{saida\PYZus{}pred\PYZus{}1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}print(\PYZsq{}Acurácia Classificador 1 [\PYZpc{}]: \PYZsq{}, 100*acuracia\PYZus{}clf1/MC)}
+\end{Verbatim}
+
+    \hypertarget{classificador-2}{%
+\paragraph{Classificador 2}\label{classificador-2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{}Classificador 2}
+         \PY{c+c1}{\PYZsh{}Descorrelacao Linear via PCA}
+         
+         \PY{n}{entrada\PYZus{}treino\PYZus{}clf2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{entrada\PYZus{}treino}\PY{p}{)}\PY{p}{;}
+         \PY{n}{aux} \PY{o}{=} \PY{n}{entrada\PYZus{}treino\PYZus{}clf2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}
+         \PY{n}{aux} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{aux}\PY{p}{,} \PY{p}{(}\PY{n}{aux}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{genero\PYZus{}modificado\PYZus{}treino} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{aux}\PY{p}{,} \PY{n}{saida\PYZus{}treino}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{genero\PYZus{}modificado\PYZus{}treino} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{genero\PYZus{}modificado\PYZus{}treino}\PY{p}{)}
+         \PY{n}{entrada\PYZus{}treino\PYZus{}clf2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]} \PY{o}{=} \PY{n}{genero\PYZus{}modificado\PYZus{}treino}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{;}
+         
+         \PY{n}{entrada\PYZus{}teste\PYZus{}clf2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{entrada\PYZus{}teste}\PY{p}{)}\PY{p}{;}
+         \PY{n}{aux} \PY{o}{=} \PY{n}{entrada\PYZus{}teste\PYZus{}clf2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}
+         \PY{n}{aux} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{aux}\PY{p}{,} \PY{p}{(}\PY{n}{aux}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{genero\PYZus{}modificado\PYZus{}teste} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{aux}\PY{p}{,} \PY{n}{saida\PYZus{}teste}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{genero\PYZus{}modificado\PYZus{}teste} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{genero\PYZus{}modificado\PYZus{}teste}\PY{p}{)}
+         \PY{n}{entrada\PYZus{}teste\PYZus{}clf2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]} \PY{o}{=} \PY{n}{genero\PYZus{}modificado\PYZus{}teste}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{;}
+         
+         \PY{n}{acuracia\PYZus{}clf2}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{;}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{MC}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{clf2} \PY{o}{=} \PY{n}{SGDClassifier}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{)}
+             \PY{n}{clf2}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{entrada\PYZus{}treino\PYZus{}clf2}\PY{p}{,} \PY{n}{saida\PYZus{}treino}\PY{p}{)}
+         
+             \PY{n}{saida\PYZus{}pred\PYZus{}2} \PY{o}{=} \PY{n}{clf2}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{entrada\PYZus{}teste\PYZus{}clf2}\PY{p}{)}
+             \PY{n}{saida\PYZus{}pred\PYZus{}2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}2}\PY{p}{,} \PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{acuracia\PYZus{}clf2} \PY{o}{=} \PY{n}{acuracia\PYZus{}clf2} \PY{o}{+} \PY{n}{metrics}\PY{o}{.}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{saida\PYZus{}teste}\PY{p}{,} \PY{n}{saida\PYZus{}pred\PYZus{}2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}print(\PYZsq{}Acurácia Classificador 2 [\PYZpc{}]: \PYZsq{}, 100*acuracia\PYZus{}clf2/MC)}
+\end{Verbatim}
+
+    \hypertarget{classificador-3}{%
+\paragraph{Classificador 3}\label{classificador-3}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}Classificador 3}
+         \PY{c+c1}{\PYZsh{}Independencia via PCA Não Linear}
+         
+         \PY{n}{entrada\PYZus{}treino\PYZus{}clf3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{entrada\PYZus{}treino}\PY{p}{)}\PY{p}{;}
+         \PY{n}{aux} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{entrada\PYZus{}treino\PYZus{}clf3}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}funcao de nao linearidade}
+         \PY{n}{aux} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{aux}\PY{p}{,} \PY{p}{(}\PY{n}{aux}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{genero\PYZus{}modificado\PYZus{}treino} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{aux}\PY{p}{,} \PY{n}{saida\PYZus{}treino}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{genero\PYZus{}modificado\PYZus{}treino} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{genero\PYZus{}modificado\PYZus{}treino}\PY{p}{)}
+         \PY{n}{entrada\PYZus{}treino\PYZus{}clf3}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]} \PY{o}{=} \PY{n}{genero\PYZus{}modificado\PYZus{}treino}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{;}
+         
+         \PY{n}{entrada\PYZus{}teste\PYZus{}clf3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n}{entrada\PYZus{}teste}\PY{p}{)}\PY{p}{;}
+         \PY{n}{aux} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{entrada\PYZus{}teste\PYZus{}clf2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)}
+         \PY{n}{aux} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{aux}\PY{p}{,} \PY{p}{(}\PY{n}{aux}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{genero\PYZus{}modificado\PYZus{}teste} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{aux}\PY{p}{,} \PY{n}{saida\PYZus{}teste}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{;}
+         \PY{n}{genero\PYZus{}modificado\PYZus{}teste} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{genero\PYZus{}modificado\PYZus{}teste}\PY{p}{)}
+         \PY{n}{entrada\PYZus{}teste\PYZus{}clf3}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]} \PY{o}{=} \PY{n}{genero\PYZus{}modificado\PYZus{}teste}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{;}
+         
+         \PY{n}{acuracia\PYZus{}clf3}\PY{o}{=}\PY{l+m+mi}{0}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{MC}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{clf3} \PY{o}{=} \PY{n}{SGDClassifier}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{tol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{)}
+             \PY{n}{clf3}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{entrada\PYZus{}treino\PYZus{}clf2}\PY{p}{,} \PY{n}{saida\PYZus{}treino}\PY{p}{)}
+         
+             \PY{n}{saida\PYZus{}pred\PYZus{}3} \PY{o}{=} \PY{n}{clf3}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{entrada\PYZus{}teste\PYZus{}clf3}\PY{p}{)}
+             \PY{n}{saida\PYZus{}pred\PYZus{}3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}3}\PY{p}{,} \PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}3}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{acuracia\PYZus{}clf3} \PY{o}{=} \PY{n}{metrics}\PY{o}{.}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{saida\PYZus{}teste}\PY{p}{,} \PY{n}{saida\PYZus{}pred\PYZus{}3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}print(\PYZsq{}Acurácia Classificador 3 [\PYZpc{}]: \PYZsq{}, 100*acuracia\PYZus{}clf3/MC)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Geracao da saida}
+         
+         \PY{n}{saida\PYZus{}acuracia} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classificador 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classificador 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classificador 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Acurácia [}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{acuracia\PYZus{}clf1}\PY{p}{,}\PY{n}{acuracia\PYZus{}clf2}\PY{p}{,} \PY{n}{acuracia\PYZus{}clf3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{acuracia\PYZus{}formatada} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{saida\PYZus{}acuracia}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{saida\PYZus{}acuracia}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{saida\PYZus{}acuracia}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{acuracia\PYZus{}formatada}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}                 Classificador 1    Classificador 2     Classificador 3
+         Acurácia [\%]  76.81449631449631  76.86179361179362  0.7484643734643734
+\end{Verbatim}
+            
+    Do resultado acima, notamos uma pequena perda de desempenho do
+Classificador 2 para o Classificador 1, em termos de acurácia. Este tipo
+de perda já é esperado, uma vez que ao reduzirmos a influência do
+atributo discriminatório sobre as classes do problema, eliminamos parte
+da informação de que o classificador necessita.
+
+Esta perda de informação é muito mais acentuada no Classificador 3. Como
+aplicamos a descorrelação não-linear, eliminamos de modo mais acentuado
+a influência do atributo discriminatório sobre as classes do problema,
+quando comparado com a redução provida pela descorrelação linear.
+
+Na sequência, vamos avaliar como cada um dos classificadores atua na
+promoção da equiadade. Para isso, avaliamos o percentual de indivíduos
+classificados como ``Alta Renda'' em cada uma das subpopulações de
+interesse.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}Calculo das taxas em cada uma das subpopulacoes}
+         
+         \PY{n}{indice\PYZus{}masc} \PY{o}{=} \PY{n}{entrada\PYZus{}teste}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}
+         \PY{n}{indice\PYZus{}fem} \PY{o}{=} \PY{n}{entrada\PYZus{}teste}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}
+         
+         \PY{n}{saida\PYZus{}pred\PYZus{}1\PYZus{}masc} \PY{o}{=} \PY{n}{saida\PYZus{}pred\PYZus{}1}\PY{p}{[}\PY{n}{indice\PYZus{}masc}\PY{p}{]}
+         \PY{n}{saida\PYZus{}pred\PYZus{}1\PYZus{}fem} \PY{o}{=} \PY{n}{saida\PYZus{}pred\PYZus{}1}\PY{p}{[}\PY{n}{indice\PYZus{}fem}\PY{p}{]}
+         \PY{n}{tam\PYZus{}populacao} \PY{o}{=} \PY{n}{saida\PYZus{}pred\PYZus{}1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{total\PYZus{}masc\PYZus{}1} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}1\PYZus{}masc}\PY{p}{)}
+         \PY{n}{total\PYZus{}fem\PYZus{}1} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}1\PYZus{}fem}\PY{p}{)}
+         \PY{n}{taxa\PYZus{}masc\PYZus{}cl1} \PY{o}{=} \PY{n}{total\PYZus{}masc\PYZus{}1}\PY{o}{/}\PY{n}{tam\PYZus{}populacao}
+         \PY{n}{taxa\PYZus{}masc\PYZus{}cl1} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{taxa\PYZus{}masc\PYZus{}cl1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{taxa\PYZus{}fem\PYZus{}cl1} \PY{o}{=} \PY{n}{total\PYZus{}fem\PYZus{}1}\PY{o}{/}\PY{n}{tam\PYZus{}populacao}
+         \PY{n}{taxa\PYZus{}fem\PYZus{}cl1} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{taxa\PYZus{}fem\PYZus{}cl1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{saida\PYZus{}pred\PYZus{}2\PYZus{}masc} \PY{o}{=} \PY{n}{saida\PYZus{}pred\PYZus{}2}\PY{p}{[}\PY{n}{indice\PYZus{}masc}\PY{p}{]}
+         \PY{n}{saida\PYZus{}pred\PYZus{}2\PYZus{}fem} \PY{o}{=} \PY{n}{saida\PYZus{}pred\PYZus{}2}\PY{p}{[}\PY{n}{indice\PYZus{}fem}\PY{p}{]}
+         \PY{n}{total\PYZus{}masc\PYZus{}2} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}2\PYZus{}masc}\PY{p}{)}
+         \PY{n}{total\PYZus{}fem\PYZus{}2} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}2\PYZus{}fem}\PY{p}{)}
+         \PY{n}{taxa\PYZus{}masc\PYZus{}cl2} \PY{o}{=} \PY{n}{total\PYZus{}masc\PYZus{}2}\PY{o}{/}\PY{n}{tam\PYZus{}populacao}
+         \PY{n}{taxa\PYZus{}masc\PYZus{}cl2} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{taxa\PYZus{}masc\PYZus{}cl2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{taxa\PYZus{}fem\PYZus{}cl2} \PY{o}{=} \PY{n}{total\PYZus{}fem\PYZus{}2}\PY{o}{/}\PY{n}{tam\PYZus{}populacao}
+         \PY{n}{taxa\PYZus{}fem\PYZus{}cl2} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{taxa\PYZus{}fem\PYZus{}cl2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{saida\PYZus{}pred\PYZus{}3\PYZus{}masc} \PY{o}{=} \PY{n}{saida\PYZus{}pred\PYZus{}3}\PY{p}{[}\PY{n}{indice\PYZus{}masc}\PY{p}{]}
+         \PY{n}{saida\PYZus{}pred\PYZus{}3\PYZus{}fem} \PY{o}{=} \PY{n}{saida\PYZus{}pred\PYZus{}3}\PY{p}{[}\PY{n}{indice\PYZus{}fem}\PY{p}{]}
+         \PY{n}{total\PYZus{}masc\PYZus{}3} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}3\PYZus{}masc}\PY{p}{)}
+         \PY{n}{total\PYZus{}fem\PYZus{}3} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{saida\PYZus{}pred\PYZus{}3\PYZus{}fem}\PY{p}{)}
+         \PY{n}{taxa\PYZus{}masc\PYZus{}cl3} \PY{o}{=} \PY{n}{total\PYZus{}masc\PYZus{}3}\PY{o}{/}\PY{n}{tam\PYZus{}populacao}
+         \PY{n}{taxa\PYZus{}masc\PYZus{}cl3} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{taxa\PYZus{}masc\PYZus{}cl3}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{taxa\PYZus{}fem\PYZus{}cl3} \PY{o}{=} \PY{n}{total\PYZus{}fem\PYZus{}3}\PY{o}{/}\PY{n}{tam\PYZus{}populacao}
+         \PY{n}{taxa\PYZus{}fem\PYZus{}cl3} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{taxa\PYZus{}fem\PYZus{}cl3}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         
+         \PY{n}{saida\PYZus{}taxa} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classificador 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classificador 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classificador 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pop. Masculina [}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{taxa\PYZus{}masc\PYZus{}cl1}\PY{p}{,} \PY{n}{taxa\PYZus{}masc\PYZus{}cl2}\PY{p}{,} \PY{n}{taxa\PYZus{}masc\PYZus{}cl3}\PY{p}{]}\PY{p}{,}
+                         \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pop. Feminina [}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{taxa\PYZus{}fem\PYZus{}cl1}\PY{p}{,}  \PY{n}{taxa\PYZus{}fem\PYZus{}cl2}\PY{p}{,}  \PY{n}{taxa\PYZus{}fem\PYZus{}cl3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{taxa\PYZus{}formatada} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{saida\PYZus{}taxa}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{saida\PYZus{}taxa}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{saida\PYZus{}taxa}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{taxa\PYZus{}formatada}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:}                        Classificador 1    Classificador 2    Classificador 3
+         Pop. Masculina [\%]  28.992628992628994  29.65806715806716  27.21130221130221
+         Pop. Feminina [\%]    4.565929565929566  7.125307125307126  6.664619164619165
+\end{Verbatim}
+            
+    Da tabela acima, notamos que o Classificador 2, apesar de ter uma
+acurácia inferior à do Classificador 1, teve um pequeno avanço em
+direção à equidade, uma vez que houve uma redução no percentual de
+indivíduos da população masculina classificados como ``Alta Renda'' e um
+acréscimo desta mesma categoria na população feminina.
+
+Já no caso do Classificador 3, notamos um acréscimo de indivíduos
+pertencentes à classe ``Alta Renda'' nas duas subpopulações, o que não
+caminha em direção à equidade.
+
+Para o cenário que estudamos, ambas as estratégias para mitigar o efeito
+do atributo discriminatório levaram a uma queda da acurácia, como
+esperado. Contudo, a decorrelação linear permitiu avanços em direção à
+equidade, algo que não observamos na versão não linear (Classificador
+3).
+
+    \hypertarget{conclusuxf5es}{%
+\subsection{Conclusões}\label{conclusuxf5es}}
+
+Neste trabalho avaliamos como algumas das técnicas de ICA, \emph{i.e},
+descorrelação linear e descorrelação não-linear, podem ser usadas para
+promover a equidade na tarefa de classificação. Para o caso particular
+que estudamos, ambas as técnicas levaram a uma redução de acurácia nos
+classificadores. Contudo, a descorrelação linear levou a uma pequena
+aproximação entre as populações masculina e feminina, em termos de
+indivíduos classificados como ``Alta Renda''. Não observamos a mesma
+aproximação para quando empregamos a descorrelação não-linear.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+\bibliographystyle{unsrt}
+\bibliography{myref}
+
+    
+    \end{document}

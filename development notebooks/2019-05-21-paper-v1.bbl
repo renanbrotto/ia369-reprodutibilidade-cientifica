@@ -1,0 +1,64 @@
+\begin{thebibliography}{10}
+
+\bibitem{Kamath2019}
+Uday Kamath, John Liu, and James Whitaker.
+\newblock {\em Deep Learning for NLP and Speech Recognition}.
+\newblock Springer, 1ª edition, 2019.
+
+\bibitem{Cipolla2013}
+Roberto Cipolla, Sebastiano Battiato, and Giovanni~Maria Farinella.
+\newblock {\em Machine Learning for Computer Vision}.
+\newblock Springer, 1ª edition, 2013.
+
+\bibitem{Duda2000}
+Richard~O. Duda, David~G. Stork, and Peter~E. Hart.
+\newblock {\em Pattern Classification}.
+\newblock Wiley-Interscience, 2ª edition, 2000.
+
+\bibitem{Bishop2006}
+Christopher~M. Bishop.
+\newblock {\em Pattern Recognition and Machine Learning}.
+\newblock Springer, 1ª edition, 2006.
+
+\bibitem{Samuel1959}
+A.~L. Samuel.
+\newblock Some studies in machine learning using the game of checkers.
+\newblock {\em IBM Journal of Research and Development ( Volume: 3 , Issue: 3 ,
+  July 1959 )}, pages 210--229, 1959.
+\newblock \mbox{DOI}:\url{https://doi.org/10.1147/rd.33.0210}.
+
+\bibitem{Hastie2009}
+Trevor Hastie, Robert Tibshirani, and Jerome Friedman.
+\newblock {\em The Elements of Statistical Learning}.
+\newblock Springer, 2ª edition, 2009.
+
+\bibitem{haykin-rn}
+Simon Haykin.
+\newblock {\em Neural Networks and Learning Machines}.
+\newblock Pearson, 2008.
+
+\bibitem{ONeil2016}
+Cathy O'Neil.
+\newblock {\em Weapons of Math Destruction: How Big Data Increases Inequality
+  and Threatens Democracy}.
+\newblock Penguin, 1ª edition, 2016.
+
+\bibitem{Chouldechova2017}
+Alexandra Chouldechova.
+\newblock Fair prediction with disparate impact: A study of bias in recidivism
+  prediction instruments.
+\newblock {\em Big Data}, 5, 6 2017.
+
+\bibitem{Hyvarinen2001}
+A.~Hyvarinen, J.~Karhunen, and E.~Oja.
+\newblock {\em Independent component analysis}.
+\newblock John Wiley \& Sons, 2001.
+
+\bibitem{Zafar2017}
+Muhammad~Bilal Zafar, Isabel Valera, Manuel~Gomez Rodriguez, and Krishna~P.
+  Gummadi.
+\newblock Fairness constraints: Mechanisms for fair classification.
+\newblock {\em Proceedings of the 20th Artificial Intelligence and Statistics
+  (20-22 April 2017, Fort Lauderdale, FL, USA)}, 2017.
+
+\end{thebibliography}
