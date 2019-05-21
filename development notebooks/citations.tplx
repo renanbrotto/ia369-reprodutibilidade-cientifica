@@ -1,0 +1,14 @@
+((*- extends 'article.tplx' -*))
+
+((* block author *))
+\author{Renan Brotto}
+((* endblock author *))
+
+((* block title *))
+\title{Equidade em Aprendizado de Maquina}
+((* endblock title *))
+
+((* block bibliography *))
+\bibliographystyle{unsrt}
+\bibliography{myref}
+((* endblock bibliography *))
