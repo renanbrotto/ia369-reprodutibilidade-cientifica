@@ -1,0 +1,55 @@
+\begin{thebibliography}{10}
+
+\bibitem{Kamath2019}
+U.~Kamath, J.~Liu, and J.~Whitaker, {\em Deep Learning for NLP and Speech
+  Recognition}.
+\newblock Springer, 1ª~ed., 2019.
+
+\bibitem{Cipolla2013}
+R.~Cipolla, S.~Battiato, and G.~M. Farinella, {\em Machine Learning for
+  Computer Vision}.
+\newblock Springer, 1ª~ed., 2013.
+
+\bibitem{Duda2000}
+R.~O. Duda, D.~G. Stork, and P.~E. Hart, {\em Pattern Classification}.
+\newblock Wiley-Interscience, 2ª~ed., 2000.
+
+\bibitem{Bishop2006}
+C.~M. Bishop, {\em Pattern Recognition and Machine Learning}.
+\newblock Springer, 1ª~ed., 2006.
+
+\bibitem{Samuel1959}
+A.~L. Samuel, ``Some studies in machine learning using the game of checkers,''
+  {\em IBM Journal of Research and Development ( Volume: 3 , Issue: 3 , July
+  1959 )}, pp.~210--229, 1959.
+\newblock \mbox{DOI}:\url{https://doi.org/10.1147/rd.33.0210}.
+
+\bibitem{Hastie2009}
+T.~Hastie, R.~Tibshirani, and J.~Friedman, {\em The Elements of Statistical
+  Learning}.
+\newblock Springer, 2ª~ed., 2009.
+
+\bibitem{haykin-rn}
+S.~Haykin, {\em Neural Networks and Learning Machines}.
+\newblock Pearson, 2008.
+
+\bibitem{ONeil2016}
+C.~O'Neil, {\em Weapons of Math Destruction: How Big Data Increases Inequality
+  and Threatens Democracy}.
+\newblock Penguin, 1ª~ed., 2016.
+
+\bibitem{Chouldechova2017}
+A.~Chouldechova, ``Fair prediction with disparate impact: A study of bias in
+  recidivism prediction instruments,'' {\em Big Data}, vol.~5, 6 2017.
+
+\bibitem{Hyvarinen2001}
+A.~Hyvarinen, J.~Karhunen, and E.~Oja, {\em Independent component analysis}.
+\newblock John Wiley \& Sons, 2001.
+
+\bibitem{Zafar2017}
+M.~B. Zafar, I.~Valera, M.~G. Rodriguez, and K.~P. Gummadi, ``Fairness
+  constraints: Mechanisms for fair classification,'' {\em Proceedings of the
+  20th Artificial Intelligence and Statistics (20-22 April 2017, Fort
+  Lauderdale, FL, USA)}, 2017.
+
+\end{thebibliography}
