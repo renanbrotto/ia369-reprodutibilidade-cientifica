@@ -67,7 +67,7 @@ Pelo *Anaconda Navigator*:
 Tutorial de Instalação do Docker: https://www.digitalocean.com/community/tutorials/como-instalar-e-usar-o-docker-no-ubuntu-16-04-pt
 
 1) Clonar o repositório
-2) navegar até a pasta do paper executável (ia369-reprodutibilidade-cientifica-master)
+2) Navegar até a pasta do paper executável (ia369-reprodutibilidade-cientifica-master)
 3) Executar o comando: docker build --tag=imagem-equidade . 
 4) Executar o comando: docker run -p 8888:8888 imagem-equidade
 5) Após instalar todas as dependências listadas em requirements.txt, aparecerá a seguinte mensagem no terminal:
