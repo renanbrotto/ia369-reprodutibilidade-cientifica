@@ -8,6 +8,13 @@ Ao todo, estudamos 6 classificadores neste trabalho: 3 classificadores baseados 
 
 ![Workflow](fig/WorkflowIA369.png)
 
+
+## Paper Executável
+
+A versão final do paper executável se encontra na pasta "deliverable notebooks", arquivo "Equidade-paper-2c.pdf", assim como o notebook final "equidade.ipynb".
+
+Na sequência são apresentadas as instruções para a execução do paper.
+
 ## Instruções para Execução 
 
 Para a execução do paper, é recomendada a instalação do ambiente Anaconda
