@@ -15,7 +15,52 @@ A versão final do paper executável se encontra na pasta "deliverable notebooks
 
 Na sequência são apresentadas as instruções para a execução do paper.
 
-## Instruções para Execução 
+Como sugestão, procure tentar reproduzir o paper primeiro via Docker; caso não seja possível, tente instalar os pacotes via Anaconda, conforme as instruções abaixo; em último caso, busque ajustar o ambiente via pip.
+
+## Execução via Docker
+
+Tutorial de Instalação do Docker: https://www.digitalocean.com/community/tutorials/como-instalar-e-usar-o-docker-no-ubuntu-16-04-pt
+
+### Maneira 1: A partir da imagem disponível no DockerHub
+
+A imagem disponibilizada se encontrar no DockerHub: https://cloud.docker.com/repository/docker/renanbrotto/imagem-equidade
+
+1) Com o Docker instalado, execute o seguinte comando no terminal: sudo docker run -p 8888:8888 renanbrotto/imagem-equidade
+2) Após instalar todas as dependências listadas em requirements.txt, aparecerá a seguinte mensagem no terminal:
+
+ *To access the notebook, open this file in a browser:
+        file:///home/jovyan/.local/share/jupyter/runtime/nbserver-8-open.html*     
+        
+        
+ *Or copy and paste one of these URLs: http://(69d14d731a14 or 127.0.0.1):8888/?token=11e6175d2d69cd2b8c4fb93396612a256e733449fc984a23*
+
+3) Após colar uma das URLs acima no navegador da máquina local (para o exemplo acima, teríamos o seguinte endereço na barra de navegação:  127.0.0.1:8888/?token=11e6175d2d69cd2b8c4fb93396612a256e733449fc984a23) o Jupyter será aberto automaticamente em seu navegador
+4) Navegue até a pasta "deliverable notebooks" e execute o arquivo "equidade.ipynb"
+5) Com o notebook aberto, vá até a aba "Cell" e clique em "Run All"
+6) Todas as figuras produzidas serão salvas na pasta "fig" que se encontra na raiz do diretório 
+
+
+### Maneira 2: A partir do Dockerfile
+
+1) Clonar o repositório
+2) Navegar até a pasta do paper executável (<caminho>./ia369-reprodutibilidade-cientifica-master)
+3) Executar o comando: sudo docker build --tag=imagem-equidade . 
+4) Executar o comando: sudo docker run -p 8888:8888 imagem-equidade
+5) Após instalar todas as dependências listadas em requirements.txt, aparecerá a seguinte mensagem no terminal:
+
+ *To access the notebook, open this file in a browser:
+        file:///home/jovyan/.local/share/jupyter/runtime/nbserver-8-open.html*     
+        
+        
+ *Or copy and paste one of these URLs: http://(69d14d731a14 or 127.0.0.1):8888/?token=11e6175d2d69cd2b8c4fb93396612a256e733449fc984a23*
+
+6) Após colar uma das URLs acima no navegador da máquina local (para o exemplo acima, teríamos o seguinte endereço na barra de navegação:  127.0.0.1:8888/?token=11e6175d2d69cd2b8c4fb93396612a256e733449fc984a23) o Jupyter será aberto automaticamente em seu navegador
+7) Navegue até a pasta "deliverable notebooks" e execute o arquivo "equidade.ipynb"
+8) Com o notebook aberto, vá até a aba "Cell" e clique em "Run All"
+9) Todas as figuras produzidas serão salvas na pasta "fig" que se encontra na raiz do diretório 
+
+
+## Execução via Anaconda ou Pip 
 
 Para a execução do paper, é recomendada a instalação do ambiente Anaconda
 
@@ -69,24 +114,5 @@ Pelo *Anaconda Navigator*:
 1. Navegue pelas pastas até onde o repositório foi clonado. Acesse a pasta *deliverable notebooks*.
 2. Selecione o arquivo *equidade.ipynb*
 
-## Execução via Docker
 
-Tutorial de Instalação do Docker: https://www.digitalocean.com/community/tutorials/como-instalar-e-usar-o-docker-no-ubuntu-16-04-pt
-
-1) Clonar o repositório
-2) Navegar até a pasta do paper executável (ia369-reprodutibilidade-cientifica-master)
-3) Executar o comando: docker build --tag=imagem-equidade . 
-4) Executar o comando: docker run -p 8888:8888 imagem-equidade
-5) Após instalar todas as dependências listadas em requirements.txt, aparecerá a seguinte mensagem no terminal:
-
- *To access the notebook, open this file in a browser:
-        file:///home/jovyan/.local/share/jupyter/runtime/nbserver-8-open.html*     
-        
-        
- *Or copy and paste one of these URLs: http://(69d14d731a14 or 127.0.0.1):8888/?token=11e6175d2d69cd2b8c4fb93396612a256e733449fc984a23*
-
-6) Após colar uma das URLs acima no navegador da máquina local (para o exemplo acima, teríamos o seguinte endereço na barra de navegação:  127.0.0.1:8888/?token=11e6175d2d69cd2b8c4fb93396612a256e733449fc984a23) o Jupyter será aberto automaticamente em seu navegador
-7) Navegue até a pasta "deliverable notebooks" e execute o arquivo "equidade.ipynb"
-8) Com o notebook aberto, vá até a aba "Cell" e clique em "Run All"
-9) Todas as figuras produzidas serão salvas na pasta "fig" que se encontra na raiz do diretório 
 
