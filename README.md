@@ -17,6 +17,8 @@ Na sequência são apresentadas as instruções para a execução do paper.
 
 Como sugestão, procure tentar reproduzir o paper primeiro via Docker; caso não seja possível, tente instalar os pacotes via Anaconda, conforme as instruções abaixo; em último caso, busque ajustar o ambiente via pip.
 
+*OBS.: Em todos os cenários foi fixada a semente para a geração de números aleatórios para o treinamento dos modelos. Contudo, a execução via container produz resultados bastante distintos daqueles obtidos via execução na própria máquina. Essas diferenças de resultados levam a conclusões distintas: no caso de containers, os melhores modelos são os baseados em regressão logística; já na própria máquina, as árvores de decisão são a melhor escolha. O paper produzido foi baseado nos resultados obtidos na máquina, ou seja, sem o uso de container.*
+
 ## Execução via Docker
 
 Tutorial de Instalação do Docker: https://www.digitalocean.com/community/tutorials/como-instalar-e-usar-o-docker-no-ubuntu-16-04-pt
@@ -113,6 +115,7 @@ Pelo *Anaconda Navigator*:
 
 1. Navegue pelas pastas até onde o repositório foi clonado. Acesse a pasta *deliverable notebooks*.
 2. Selecione o arquivo *equidade.ipynb*
+
 
 
 
